@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>تطبيق لغتي - درس الاستثناء</title>
+    
+    <!-- إعدادات سفاري للآيفون -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="درس الاستثناء">
+    <meta name="theme-color" content="#0f766e">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Tailwind CSS & الخطوط والأيقونات -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body { 
+            font-family: 'Cairo', sans-serif; 
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.3s ease-in-out; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .perspective-1000 { perspective: 1000px; }
+        .transform-style-3d { transform-style: preserve-3d; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+        .backface-hidden { backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-800 antialiased h-full flex justify-center items-center">
+
+    <div class="w-full max-w-md bg-slate-50 min-h-full sm:min-h-[850px] sm:max-h-[92vh] sm:rounded-[40px] flex flex-col shadow-2xl relative overflow-hidden pb-20 border-slate-700/30 sm:border">
+        
+        <!-- الهيدر العلوي -->
+        <header class="bg-gradient-to-r from-teal-800 via-teal-700 to-emerald-800 text-white p-4 pt-6 sticky top-0 z-40 flex items-center justify-between shadow-lg">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center font-black text-xl shadow-inner border border-white/30 text-emerald-200">
+                    ض
+                </div>
+                <div>
+                    <h1 class="font-bold text-base leading-tight">الكفايات اللغوية</h1>
+                    <p class="text-xs text-emerald-100/80 font-medium">درس الاستثناء التفاعلي</p>
+                </div>
+            </div>
+            
+            <button onclick="toggleInstallModal()" class="flex items-center gap-1.5 text-xs bg-emerald-500/30 hover:bg-emerald-500/40 text-emerald-100 px-3 py-1.5 rounded-full font-bold border border-emerald-300/30 transition active:scale-95">
+                <i class="fa-solid fa-download text-emerald-300"></i>
+                <span>تثبيت</span>
+            </button>
+        </header>
+
+        <!-- المحتوى الرئيسي -->
+        <main class="flex-1 overflow-y-auto p-4 space-y-4">
+
+            <!-- 1. الشاشة الرئيسية -->
+            <div id="tab-home" class="tab-content active space-y-4">
+                
+                <div class="bg-gradient-to-br from-teal-800 via-teal-900 to-slate-900 text-white p-5 rounded-3xl shadow-xl relative overflow-hidden border border-teal-600/30">
+                    <div class="absolute -left-6 -bottom-6 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl"></div>
+                    <span class="text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 px-3 py-1 rounded-full font-bold tracking-wide uppercase">تطبيق تفاعلي 📱</span>
+                    <h2 class="text-xl font-extrabold mt-3 mb-1 text-white">مرحباً بك في درس الاستثناء! 👋</h2>
+                    <p class="text-xs text-slate-300 mb-4 leading-relaxed">تعلم قواعد الاستثناء، أركانه، وأحكام مستثناه بطريقة تفاعلية مبسطة.</p>
+                    
+                    <div class="flex gap-2">
+                        <button onclick="switchTab('def')" class="flex-1 bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-extrabold px-4 py-2.5 rounded-xl text-xs shadow-md active:scale-95 transition text-center">
+                            ابدأ الدرس الآن <i class="fa-solid fa-arrow-left mr-1"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- شبكة الأقسام -->
+                <div class="grid grid-cols-2 gap-3">
+                    <div onclick="switchTab('def')" class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md cursor-pointer active:scale-95 transition space-y-2">
+                        <div class="w-10 h-10 rounded-xl bg-teal-50 flex items-center justify-center text-teal-700">
+                            <i class="fa-solid fa-book-open text-xl"></i>
+                        </div>
+                        <h4 class="font-bold text-sm text-slate-800">المفهوم والأركان</h4>
+                        <p class="text-[11px] text-slate-500 leading-tight">تعريف أجزاء الجملة وأركانها</p>
+                    </div>
+
+                    <div onclick="switchTab('types')" class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md cursor-pointer active:scale-95 transition space-y-2">
+                        <div class="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-blue-700">
+                            <i class="fa-solid fa-layer-group text-xl"></i>
+                        </div>
+                        <h4 class="font-bold text-sm text-slate-800">أنواع الاستثناء</h4>
+                        <p class="text-[11px] text-slate-500 leading-tight">الحالات الثلاث وأحكام الإعراب</p>
+                    </div>
+
+                    <div onclick="switchTab('tools')" class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md cursor-pointer active:scale-95 transition space-y-2">
+                        <div class="w-10 h-10 rounded-xl bg-purple-50 flex items-center justify-center text-purple-700">
+                            <i class="fa-solid fa-screwdriver-wrench text-xl"></i>
+                        </div>
+                        <h4 class="font-bold text-sm text-slate-800">أدوات الاستثناء</h4>
+                        <p class="text-[11px] text-slate-500 leading-tight">غير، سوى، عدا، خلا، حاشا</p>
+                    </div>
+
+                    <div onclick="switchTab('cards')" class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md cursor-pointer active:scale-95 transition space-y-2">
+                        <div class="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center text-amber-700">
+                            <i class="fa-solid fa-brain text-xl"></i>
+                        </div>
+                        <h4 class="font-bold text-sm text-slate-800">بطاقات المراجعة</h4>
+                        <p class="text-[11px] text-slate-500 leading-tight">بطاقات تفاعلية 3D</p>
+                    </div>
+                </div>
+
+                <div onclick="switchTab('quiz')" class="bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 p-4 rounded-2xl shadow-md cursor-pointer active:scale-98 transition flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="w-11 h-11 rounded-xl bg-slate-950/10 flex items-center justify-center text-slate-950 text-2xl font-bold">
+                            <i class="fa-solid fa-award"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-extrabold text-sm">تحدي النحو والاختبار</h4>
+                            <p class="text-xs text-amber-950 font-medium">اختبر معلوماتك واحصل على النتيجة</p>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-chevron-left text-amber-950"></i>
+                </div>
+
+            </div>
+
+            <!-- 2. المفهوم والأركان -->
+            <div id="tab-def" class="tab-content space-y-4">
+                
+                <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm space-y-2">
+                    <div class="flex items-center justify-between">
+                        <h3 class="font-bold text-base text-slate-800">تعريف أسلوب الاستثناء</h3>
+                        <span class="text-[10px] bg-teal-100 text-teal-800 font-bold px-2.5 py-0.5 rounded-full">القاعدة</span>
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed bg-slate-50 p-3 rounded-xl border border-slate-100">
+                        هو إخراج ما بعد أداة الاستثناء من حكم ما قبلها. أي أن ما قبل الأداة ينطبق عليه الحكم، وما بعدها يخالفه.
+                    </p>
+                </div>
+
+                <div class="bg-slate-900 text-white p-5 rounded-2xl text-center shadow-lg relative space-y-3">
+                    <p class="text-xs text-slate-400 font-medium">اضغط على السماعة للاستماع للقول:</p>
+                    <div class="flex items-center justify-center gap-3">
+                        <p id="speech-text-1" class="text-amber-300 font-bold text-lg tracking-wide">حَضَرَ الطُّلَّابُ إِلاَّ طَالِباً</p>
+                        <button onclick="speakText('حَضَرَ الطُّلَّابُ إِلاَّ طَالِباً')" class="w-8 h-8 rounded-full bg-amber-400/20 text-amber-300 flex items-center justify-center hover:bg-amber-400/30 active:scale-90 transition">
+                            <i class="fa-solid fa-volume-high text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="space-y-2.5">
+                    <h4 class="font-bold text-xs text-slate-500 uppercase tracking-wider px-1">أركان جملة الاستثناء الثلاثة</h4>
+                    
+                    <div class="bg-white p-3.5 rounded-2xl border border-slate-200/80 flex items-center justify-between shadow-sm">
+                        <div class="space-y-0.5">
+                            <h5 class="font-bold text-xs text-slate-800">1. المستثنى منه</h5>
+                            <p class="text-[11px] text-slate-500">الاسم العام الذي يُطرح منه المستثنى</p>
+                        </div>
+                        <span class="text-xs px-3 py-1.5 rounded-xl font-bold bg-blue-100 text-blue-800 border border-blue-200">الطُّلاَّبُ</span>
+                    </div>
+
+                    <div class="bg-white p-3.5 rounded-2xl border border-slate-200/80 flex items-center justify-between shadow-sm">
+                        <div class="space-y-0.5">
+                            <h5 class="font-bold text-xs text-slate-800">2. أداة الاستثناء</h5>
+                            <p class="text-[11px] text-slate-500">الأداة التي تربط بين الكلمتين</p>
+                        </div>
+                        <span class="text-xs px-3 py-1.5 rounded-xl font-bold bg-amber-100 text-amber-800 border border-amber-200">إلاَّ</span>
+                    </div>
+
+                    <div class="bg-white p-3.5 rounded-2xl border border-slate-200/80 flex items-center justify-between shadow-sm">
+                        <div class="space-y-0.5">
+                            <h5 class="font-bold text-xs text-slate-800">3. المستثنى</h5>
+                            <p class="text-[11px] text-slate-500">الاسم الواقع بعد الأداة والمخرج من الحكم</p>
+                        </div>
+                        <span class="text-xs px-3 py-1.5 rounded-xl font-bold bg-emerald-100 text-emerald-800 border border-emerald-200">طَالِباً</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- 3. أنواع الاستثناء -->
+            <div id="tab-types" class="tab-content space-y-4">
+                
+                <div class="flex bg-slate-200 p-1 rounded-2xl">
+                    <button onclick="showType(0)" id="type-btn-0" class="flex-1 py-2 text-xs font-bold rounded-xl bg-white text-teal-800 shadow-sm transition">التام المثبت</button>
+                    <button onclick="showType(1)" id="type-btn-1" class="flex-1 py-2 text-xs font-bold rounded-xl text-slate-600 transition">التام المنفي</button>
+                    <button onclick="showType(2)" id="type-btn-2" class="flex-1 py-2 text-xs font-bold rounded-xl text-slate-600 transition">الناقص المنفي</button>
+                </div>
+
+                <div id="type-box-0" class="type-card bg-white p-4 rounded-2xl border border-slate-200/80 space-y-3 shadow-sm">
+                    <div class="flex justify-between items-center">
+                        <h3 class="font-bold text-base text-slate-800">1. التام المثبت</h3>
+                        <span class="text-xs bg-emerald-100 text-emerald-800 px-2.5 py-0.5 rounded-full font-bold">الحالة الأولى</span>
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed">المستثنى منه <strong>مذكور</strong> في الجملة، والجملة <strong>خالية من أدوات النفي</strong>.</p>
+                    
+                    <div class="p-3 bg-amber-50 text-amber-900 rounded-xl text-xs font-bold border border-amber-200 flex items-center gap-2">
+                        <i class="fa-solid fa-lightbulb text-amber-600"></i>
+                        <span>الحكم النحوي: واجب النصب على الاستثناء.</span>
+                    </div>
+
+                    <div class="p-3 bg-slate-900 text-emerald-400 font-bold text-center rounded-xl text-xs flex justify-between items-center">
+                        <span>فَهِمَ التَّلَامِيذُ الدَّرْسَ إِلاَّ تِلْمِيذاً</span>
+                        <button onclick="speakText('فَهِمَ التَّلَامِيذُ الدَّرْسَ إِلاَّ تِلْمِيذاً')" class="text-slate-300 hover:text-white">
+                            <i class="fa-solid fa-volume-high"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="type-box-1" class="type-card hidden bg-white p-4 rounded-2xl border border-slate-200/80 space-y-3 shadow-sm">
+                    <div class="flex justify-between items-center">
+                        <h3 class="font-bold text-base text-slate-800">2. التام المنفي</h3>
+                        <span class="text-xs bg-blue-100 text-blue-800 px-2.5 py-0.5 rounded-full font-bold">الحالة الثانية</span>
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed">المستثنى منه <strong>مذكور</strong>، والجملة <strong>سبقت بأداة نفي</strong>.</p>
+                    
+                    <div class="p-3 bg-amber-50 text-amber-900 rounded-xl text-xs font-bold border border-amber-200 flex items-center gap-2">
+                        <i class="fa-solid fa-lightbulb text-amber-600"></i>
+                        <span>الحكم النحوي: جواز النصب أو الإبدال (بدل).</span>
+                    </div>
+
+                    <div class="p-3 bg-slate-900 text-emerald-400 font-bold text-center rounded-xl text-xs flex justify-between items-center">
+                        <span>مَا حَضَرَ المَسْؤُولُونَ إِلاَّ المُدِيرَ / المُدِيرُ</span>
+                        <button onclick="speakText('مَا حَضَرَ المَسْؤُولُونَ إِلاَّ المُدِيرَ')" class="text-slate-300 hover:text-white">
+                            <i class="fa-solid fa-volume-high"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="type-box-2" class="type-card hidden bg-white p-4 rounded-2xl border border-slate-200/80 space-y-3 shadow-sm">
+                    <div class="flex justify-between items-center">
+                        <h3 class="font-bold text-base text-slate-800">3. الناقص المنفي</h3>
+                        <span class="text-xs bg-purple-100 text-purple-800 px-2.5 py-0.5 rounded-full font-bold">الحالة الثالثة</span>
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed">المستثنى منه <strong>محذوف</strong>، والجملة <strong>منفية</strong>.</p>
+                    
+                    <div class="p-3 bg-amber-50 text-amber-900 rounded-xl text-xs font-bold border border-amber-200 flex items-center gap-2">
+                        <i class="fa-solid fa-lightbulb text-amber-600"></i>
+                        <span>الحكم النحوي: يعرب حسب موقعه في الجملة.</span>
+                    </div>
+
+                    <div class="p-3 bg-slate-900 text-emerald-400 font-bold text-center rounded-xl text-xs flex justify-between items-center">
+                        <span>مَا فَازَ إِلاَّ المُجْتَهِدُ</span>
+                        <button onclick="speakText('مَا فَازَ إِلاَّ المُجْتَهِدُ')" class="text-slate-300 hover:text-white">
+                            <i class="fa-solid fa-volume-high"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- 4. الأدوات -->
+            <div id="tab-tools" class="tab-content space-y-3">
+                <div class="bg-white p-4 rounded-2xl border border-slate-200/80 space-y-2 shadow-sm">
+                    <h4 class="font-bold text-sm text-teal-800">1. (غير) و (سوى)</h4>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        الاسم الواقع بعدهما يُعرب دائماً: <strong>مضافاً إليه مجروراً</strong>.
+                    </p>
+                    <div class="bg-slate-50 p-2.5 rounded-xl text-xs font-bold text-slate-800 border border-slate-100">
+                        حَضَرَ الطُّلَّابُ غَيْرَ طَالِبٍ
+                    </div>
+                </div>
+
+                <div class="bg-white p-4 rounded-2xl border border-slate-200/80 space-y-2 shadow-sm">
+                    <h4 class="font-bold text-sm text-teal-800">2. (خلا - عدا - حاشا)</h4>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        تكون حروف جر أو أفعال ماضية، وإذا سبقت بـ (ما) فهي أفعال فقط وما بعدها مفعول به.
+                    </p>
+                    <div class="bg-slate-50 p-2.5 rounded-xl text-xs font-bold text-slate-800 border border-slate-100">
+                        حَضَرَ القَوْمُ مَا عَدَا زَيْداً
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. البطاقات -->
+            <div id="tab-cards" class="tab-content space-y-4 text-center">
+                <div class="perspective-1000 w-full min-h-[220px]">
+                    <div id="flashcard-inner" onclick="flipCard()" class="transform-style-3d relative w-full min-h-[220px] bg-gradient-to-br from-teal-800 to-slate-900 text-white rounded-3xl p-6 flex flex-col justify-between items-center cursor-pointer shadow-xl border border-teal-600/30">
+                        <div id="card-front" class="w-full flex flex-col justify-between items-center h-full">
+                            <span id="card-num" class="text-[11px] bg-white/10 px-3 py-1 rounded-full font-bold text-emerald-300">بطاقة 1 من 4</span>
+                            <h3 id="card-question" class="font-bold text-base leading-relaxed my-4 text-slate-100">ما هي أركان جملة الاستثناء الثلاثة؟</h3>
+                            <span class="text-[10px] text-slate-400 bg-white/5 px-3 py-1 rounded-full border border-white/10">اضغط لقلب البطاقة 🔄</span>
+                        </div>
+                        <div id="card-back" class="rotate-y-180 backface-hidden absolute inset-0 bg-slate-900 text-emerald-300 rounded-3xl p-6 flex flex-col justify-between items-center">
+                            <span class="text-[11px] bg-emerald-500/20 px-3 py-1 rounded-full font-bold border border-emerald-500/30">الإجابة</span>
+                            <p id="card-answer" class="font-bold text-sm text-white leading-relaxed my-auto whitespace-pre-line"></p>
+                            <span class="text-[10px] text-slate-400">اضغط للعودة 🔄</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex gap-3">
+                    <button onclick="prevCard()" class="flex-1 py-3 bg-white border border-slate-200 text-slate-700 text-xs font-bold rounded-2xl shadow-sm active:scale-95 transition">
+                        السابقة
+                    </button>
+                    <button onclick="nextCard()" class="flex-1 py-3 bg-teal-800 text-white text-xs font-bold rounded-2xl shadow-sm active:scale-95 transition">
+                        التالية
+                    </button>
+                </div>
+            </div>
+
+            <!-- 6. الاختبار -->
+            <div id="tab-quiz" class="tab-content space-y-4">
+                <div id="quiz-container" class="space-y-3"></div>
+                <div id="quiz-result" class="hidden bg-slate-900 text-white p-6 rounded-3xl text-center space-y-3 shadow-xl border border-slate-700">
+                    <h3 id="score-text" class="font-extrabold text-xl text-emerald-300">النتيجة: 0 / 4</h3>
+                    <p id="score-msg" class="text-xs text-slate-300"></p>
+                    <button onclick="resetQuiz()" class="w-full py-3 bg-emerald-500 text-slate-950 font-extrabold text-xs rounded-xl shadow active:scale-95 transition">
+                        إعادة الاختبار 🔄
+                    </button>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- نافذة التثبيت المصممة للآيفون -->
+        <div id="install-modal" class="hidden fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+            <div class="bg-white w-full max-w-sm rounded-3xl p-5 space-y-4 text-right shadow-2xl">
+                <div class="flex justify-between items-center border-b pb-3">
+                    <h3 class="font-bold text-base text-slate-800 flex items-center gap-2">
+                        <i class="fa-brands fa-apple text-teal-700 text-lg"></i>
+                        <span>تثبيت التطبيق على الآيفون</span>
+                    </h3>
+                    <button onclick="toggleInstallModal()" class="text-slate-400 hover:text-slate-600 text-lg">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+
+                <div class="space-y-2.5 text-xs">
+                    <div class="flex items-center gap-3 bg-slate-50 p-2.5 rounded-xl border">
+                        <span class="w-6 h-6 rounded-full bg-teal-100 text-teal-800 font-bold flex items-center justify-center shrink-0">1</span>
+                        <p class="text-slate-700">اضغط على زر <strong>المشاركة</strong> بأسفل سفاري.</p>
+                    </div>
+                    <div class="flex items-center gap-3 bg-slate-50 p-2.5 rounded-xl border">
+                        <span class="w-6 h-6 rounded-full bg-teal-100 text-teal-800 font-bold flex items-center justify-center shrink-0">2</span>
+                        <p class="text-slate-700">اختر <strong>الإضافة إلى الشاشة الرئيسية</strong>.</p>
+                    </div>
+                    <div class="flex items-center gap-3 bg-slate-50 p-2.5 rounded-xl border">
+                        <span class="w-6 h-6 rounded-full bg-teal-100 text-teal-800 font-bold flex items-center justify-center shrink-0">3</span>
+                        <p class="text-slate-700">اضغط <strong>إضافة</strong> وسيظهر التطبيق بجوالك!</p>
+                    </div>
+                </div>
+
+                <button onclick="toggleInstallModal()" class="w-full py-2.5 bg-teal-800 text-white font-bold text-xs rounded-xl">
+                    حسناً 👍
+                </button>
+            </div>
+        </div>
+
+        <!-- شريط التنقل السفلي -->
+        <nav class="bg-white/90 backdrop-blur-md border-t border-slate-200/80 fixed sm:absolute bottom-0 left-0 right-0 max-w-md mx-auto px-2 py-2 flex justify-around text-[10px] font-bold shadow-lg z-30">
+            <button onclick="switchTab('home')" id="nav-home" class="nav-btn flex flex-col items-center text-teal-800 gap-1">
+                <i class="fa-solid fa-house text-lg"></i>الرئيسية
+            </button>
+            <button onclick="switchTab('def')" id="nav-def" class="nav-btn flex flex-col items-center text-slate-400 gap-1">
+                <i class="fa-solid fa-book-open text-lg"></i>الأركان
+            </button>
+            <button onclick="switchTab('types')" id="nav-types" class="nav-btn flex flex-col items-center text-slate-400 gap-1">
+                <i class="fa-solid fa-layer-group text-lg"></i>الأنواع
+            </button>
+            <button onclick="switchTab('tools')" id="nav-tools" class="nav-btn flex flex-col items-center text-slate-400 gap-1">
+                <i class="fa-solid fa-screwdriver-wrench text-lg"></i>الأدوات
+            </button>
+            <button onclick="switchTab('cards')" id="nav-cards" class="nav-btn flex flex-col items-center text-slate-400 gap-1">
+                <i class="fa-solid fa-brain text-lg"></i>بطاقات
+            </button>
+            <button onclick="switchTab('quiz')" id="nav-quiz" class="nav-btn flex flex-col items-center text-slate-400 gap-1">
+                <i class="fa-solid fa-award text-lg"></i>الاختبار
+            </button>
+        </nav>
+
+    </div>
+
+    <script>
+        function speakText(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'ar-SA';
+                utterance.rate = 0.85;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            const activeTab = document.getElementById('tab-' + tabId);
+            if (activeTab) activeTab.classList.add('active');
+
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('text-teal-800');
+                btn.classList.add('text-slate-400');
+            });
+            const activeNav = document.getElementById('nav-' + tabId);
+            if (activeNav) {
+                activeNav.classList.remove('text-slate-400');
+                activeNav.classList.add('text-teal-800');
+            }
+        }
+
+        function showType(idx) {
+            document.querySelectorAll('.type-card').forEach(c => c.classList.add('hidden'));
+            document.getElementById('type-box-' + idx).classList.remove('hidden');
+
+            for (let i = 0; i < 3; i++) {
+                const btn = document.getElementById('type-btn-' + i);
+                if (i === idx) {
+                    btn.className = "flex-1 py-2 text-xs font-bold rounded-xl bg-white text-teal-800 shadow-sm transition";
+                } else {
+                    btn.className = "flex-1 py-2 text-xs font-bold rounded-xl text-slate-600 transition";
+                }
+            }
+        }
+
+        function toggleInstallModal() {
+            const modal = document.getElementById('install-modal');
+            modal.classList.toggle('hidden');
+        }
+
+        const cardsData = [
+            { q: "ما هي أركان جملة الاستثناء الثلاثة؟", a: "1. المستثنى منه\n2. أداة الاستثناء\n3. المستثنى" },
+            { q: "متى يُعرب المستثنى حسب موقعه في الجملة؟", a: "إذا كان نوع الاستثناء (ناقص منفي) أو المفرّغ." },
+            { q: "ما إعراب الاسم الواقع بعد (غير) و(سوى)؟", a: "يُعرب دائماً مضافاً إليه مجروراً." },
+            { q: "إذا سُبقت (عدا) بـ (ما المصدرية)، فما حكم ما بعدها؟", a: "يجب نصبه على أنه مفعول به منصوب." }
+        ];
+        let currentCard = 0;
+        let isFlipped = false;
+
+        function updateCard() {
+            document.getElementById('card-num').innerText = `بطاقة ${currentCard + 1} من ${cardsData.length}`;
+            document.getElementById('card-question').innerText = cardsData[currentCard].q;
+            document.getElementById('card-answer').innerText = cardsData[currentCard].a;
+            
+            const inner = document.getElementById('flashcard-inner');
+            if (isFlipped) {
+                inner.classList.add('rotate-y-180');
+            } else {
+                inner.classList.remove('rotate-y-180');
+            }
+        }
+
+        function flipCard() { isFlipped = !isFlipped; updateCard(); }
+        function nextCard() { currentCard = (currentCard + 1) % cardsData.length; isFlipped = false; updateCard(); }
+        function prevCard() { currentCard = (currentCard - 1 + cardsData.length) % cardsData.length; isFlipped = false; updateCard(); }
+
+        const quizData = [
+            { q: "في جملة 'نجَح الطلابُ إلا طالباً'، ما نوع الاستثناء؟", opts: ["تام مثبت", "تام منفي", "ناقص منفي"], ans: 0 },
+            { q: "ما إعراب كلمة 'عليٌّ' في: 'ما جاءَ إلا عليٌّ'؟", opts: ["مستثنى منصوب", "فاعل مرفوع", "مفعول به"], ans: 1 },
+            { q: "الاسم الواقع بعد (غير) و (سوى) يُعرب دائماً:", opts: ["مفعولاً به", "مضافاً إليه مجروراً", "بدلاً مرفوعاً"], ans: 1 },
+            { q: "عند قولنا 'قرأتُ الكتبَ ما عدا كتاباً'، كلمة (كتاباً) تعرب:", opts: ["مفعول به منصوب", "اسم مجرور", "خبر مرفوع"], ans: 0 }
+        ];
+
+        let selectedAnswers = {};
+
+        function renderQuiz() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = '';
+
+            quizData.forEach((q, idx) => {
+                let optionsHtml = '';
+                q.opts.forEach((opt, oIdx) => {
+                    const isSelected = selectedAnswers[idx] === oIdx;
+                    optionsHtml += `
+                        <button onclick="selectOption(${idx}, ${oIdx})" class="w-full text-right p-3 rounded-xl border text-xs transition flex items-center justify-between ${isSelected ? 'bg-teal-50 border-teal-600 text-teal-900 font-bold' : 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100'}">
+                            <span>${opt}</span>
+                            ${isSelected ? '<i class="fa-solid fa-circle-check text-teal-700"></i>' : '<i class="fa-regular fa-circle text-slate-300"></i>'}
+                        </button>
+                    `;
+                });
+
+                container.innerHTML += `
+                    <div class="bg-white p-4 rounded-2xl border border-slate-200/80 space-y-2.5 shadow-sm">
+                        <h4 class="font-bold text-xs text-slate-800 leading-snug">${idx + 1}. ${q.q}</h4>
+                        <div class="space-y-1.5">${optionsHtml}</div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML += `
+                <button onclick="checkQuiz()" class="w-full py-3.5 bg-teal-800 text-white font-extrabold text-xs rounded-xl shadow-md active:scale-95 transition">
+                    إظهار النتيجة <i class="fa-solid fa-check-double mr-1"></i>
+                </button>
+            `;
+        }
+
+        function selectOption(qIdx, oIdx) {
+            selectedAnswers[qIdx] = oIdx;
+            renderQuiz();
+        }
+
+        function checkQuiz() {
+            let score = 0;
+            quizData.forEach((q, idx) => {
+                if (selectedAnswers[idx] === q.ans) score++;
+            });
+
+            document.getElementById('score-text').innerText = `النتيجة: ${score} / ${quizData.length}`;
+            let msg = "ممتاز جداً! أتقنت درس الاستثناء بنجاح 🌟";
+            if (score < 3) msg = "محاولة جيدة، راجع أنواع الاستثناء ثم أعد الاختبار مرة أخرى 👍";
+            document.getElementById('score-msg').innerText = msg;
+
+            document.getElementById('quiz-result').classList.remove('hidden');
+        }
+
+        function resetQuiz() {
+            selectedAnswers = {};
+            document.getElementById('quiz-result').classList.add('hidden');
+            renderQuiz();
+        }
+
+        window.onload = function() {
+            updateCard();
+            renderQuiz();
+        };
+    </script>
+</body>
+</html>
